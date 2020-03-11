@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maquina de Vendas</title>
+  <style>
+  * {
+    box-sizing: border-box;
+  }
+  h1 {
+      font-size: 20px;
+  }
+  .container {
+    margin: auto;
+    height: 100vh;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+	text-align:center;
+  }
+
+  .form {
+    width: 60px;
+    margin-bottom: 5px;
+  }
+
+  .moeda {
+    width: 60px;
+    margin-bottom: 5px;
+  }
+  .alerta {
+        display: block;
+		margin-top: 5px;
+  }
+  </style>
+  
+</head>
+<body>
+    <div class="container">
+		<div class="content">
+			<h1>Máquina de Vendas</h1>
+			<button class="button" data-value="001">$0.01</button>
+			<button class="button" data-value="005">$0.05</button>
+			<button class="button" data-value="010">$0.10</button>
+			<button class="button" data-value="025">$0.25</button>
+			<button class="button" data-value="050">$0.50</button>
+			<button class="button" data-value="100">$1.00</button>
+			<div class="alerta"></div>
+		</div>
+    </div>
+	
+	<script>
+	const alerta =  document.getElementsByClassName('alerta')[0]
+    const moedas = document.querySelectorAll('.button')
+	var contador = 0;
+	
+	moedas.forEach(function(element, index){
+		element.addEventListener('click', contar)
+	})
+    
+    function contar(event) {
+        event.preventDefault()
+        valor = parseInt(this.dataset.value)
+        
+		if(valor == 10 || valor == 25){
+            contador += valor
+            alerta.textContent = ''
+        } else {
+            alerta.style.color = 'red'
+            alerta.textContent = 'Essa moeda não é válida'
+        }
+		
+        if(contador >= 45){
+            alerta.style.color = 'green'
+            alerta.textContent = 'Você comprou uma coca-cola'
+            contador = 0
+        }
+        console.log('Valor na maquina ' + contador)
+        
+  }
+  </script>
+</body>
+</html>
